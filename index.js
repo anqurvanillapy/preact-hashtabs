@@ -1,4 +1,4 @@
-import { h, render, Component } from 'preact' // eslint-disable-line no-unused-vars
+import { h, render, Component } from 'preact'
 import Router from 'preact-router'
 import { Link } from 'preact-router/match'
 
