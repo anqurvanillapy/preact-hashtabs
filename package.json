@@ -1,7 +1,7 @@
 {
-  "name": "preact-router-tabchor",
+  "name": "preact-tabs",
   "version": "0.1.0",
-  "description": "Use anchors to create tabs, based on preact-router",
+  "description": "Minimal tabs component for preact",
   "main": "index.js",
   "scripts": {
     "prebuild": "eslint index.js",
@@ -13,25 +13,25 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/anqurvanillapy/preact-router-tabchor.git"
+    "url": "git+https://github.com/anqurvanillapy/preact-tabs.git"
   },
   "keywords": [
-    "preact-router"
+    "preact"
   ],
   "author": "AnqurVanillapy",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/anqurvanillapy/preact-router-tabchor/issues"
+    "url": "https://github.com/anqurvanillapy/preact-tabs/issues"
   },
-  "homepage": "https://github.com/anqurvanillapy/preact-router-tabchor#readme",
+  "homepage": "https://github.com/anqurvanillapy/preact-tabs#readme",
   "dependencies": {
-    "preact": "^8.2.1",
-    "preact-router": "^2.5.5"
+    "preact": "^8.2.1"
   },
   "devDependencies": {
     "babel-core": "^6.25.0",
     "babel-eslint": "^7.2.3",
     "babel-loader": "^7.1.1",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-preset-env": "^1.6.0",
     "copy-webpack-plugin": "^4.0.1",

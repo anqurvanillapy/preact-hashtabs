@@ -4,7 +4,7 @@ const CopyPlugin = require('copy-webpack-plugin')
 module.exports = {
   context: __dirname,
   devtool: 'source-map',
-  entry: ['./index.js'],
+  entry: ['./app.js'],
   output: {
     path: path.join(__dirname, 'dist'),
     publicPath: '/',

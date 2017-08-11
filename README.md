@@ -1,7 +1,7 @@
-# preact-router-tabchor
+# preact-tabs
 
-A demo of using anchors to create tabs, based on
-[preact-router](https://github.com/developit/preact-router).
+A minimal `<Tabs />` component for
+[preact](https://github.com/developit/preact).
 
 ## License
 
