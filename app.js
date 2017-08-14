@@ -6,7 +6,7 @@ const App = _ => (
     <h1><code>preact-tabs</code></h1>
     <h2>Minimal</h2>
     <Tabs>
-      <Tab label='foo' activeClassName='active'>
+      <Tab class='foo bar baz' label='foo' activeClassName='active'>
         <ul><li>foo</li></ul>
       </Tab>
       <Tab label='bar' activeClassName='active'>
