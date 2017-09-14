@@ -53,6 +53,7 @@ var Tabs = function (_Component) {
         return _defineProperty({}, labelId, {
           labelId: labelId,
           labelVal: labelVal,
+          className: child.attributes.class || '',
           activeClassName: activeClassName,
           tabcontent: child.children,
           attrs: attrs
@@ -83,20 +84,32 @@ var Tabs = function (_Component) {
       var activeTab = hash === 'default' ? tabs[tabs.default] : tabs[hash];
 
       return (0, _preact.h)(
-        'ul',
+        'section',
         null,
-        Object.values(tabs).map(function (t) {
-          return (typeof t === 'undefined' ? 'undefined' : _typeof(t)) === 'object' ? (0, _preact.h)(
-            Tab,
-            _extends({
-              labelId: t.labelId,
-              labelVal: t.labelVal,
-              activeClassName: t.activeClassName,
-              tabindex: activeTab ? activeTab.labelId : null
-            }, t.attrs),
-            t.tabcontent
-          ) : null;
-        })
+        (0, _preact.h)(
+          'ul',
+          props,
+          Object.values(tabs).map(function (t) {
+            var isActive = activeTab && activeTab.labelId === t.labelId;
+            var clsName = t.className;
+            var cls = isActive ? (clsName + ' ' + t.activeClassName).trim() : clsName;
+
+            return (typeof t === 'undefined' ? 'undefined' : _typeof(t)) === 'object' ? (0, _preact.h)(
+              'li',
+              _extends({}, t.attrs, { 'class': cls }),
+              (0, _preact.h)(
+                'a',
+                { href: '#' + t.labelId },
+                t.labelVal
+              )
+            ) : null;
+          })
+        ),
+        activeTab ? (0, _preact.h)(
+          Tab,
+          null,
+          activeTab.tabcontent
+        ) : null
       );
     }
   }]);
@@ -105,33 +118,10 @@ var Tabs = function (_Component) {
 }(_preact.Component);
 
 var Tab = function Tab(props) {
-  var labelId = props.labelId,
-      labelVal = props.labelVal,
-      tabindex = props.tabindex,
-      activeClassName = props.activeClassName,
-      children = props.children,
-      rest = _objectWithoutProperties(props, ['labelId', 'labelVal', 'tabindex', 'activeClassName', 'children']);
-
-  var clsList = props.class;
-  var isActive = tabindex === labelId;
-
-  var cls = void 0;
-
-  if (!isActive) cls = clsList || '';else cls = clsList ? clsList + ' ' + activeClassName : activeClassName;
-
   return (0, _preact.h)(
-    'li',
-    { 'class': cls },
-    (0, _preact.h)(
-      'a',
-      { href: '#' + labelId },
-      labelVal
-    ),
-    isActive ? (0, _preact.h)(
-      'div',
-      rest,
-      children
-    ) : null
+    'div',
+    null,
+    props.children
   );
 };
 

@@ -32,20 +32,19 @@ const App = () => (
   <Tabs>
     <Tab
       tabdefault
-      id='foo'
       label={{tab0: 'Tab 0'}}
       activeClassName='active'
     >
-      <ul><li>foo</li></ul>
+      <p>foo</p>
     </Tab>
     <Tab label={{tab1: 'Tab 1'}} activeClassName='active'>
-      <ul><li>bar</li></ul>
+      <p>bar</p>
     </Tab>
     <Tab label={{tab2: 'Tab 2'}} activeClassName='active'>
-      <ul><li>baz</li></ul>
+      <p>baz</p>
     </Tab>
     <Tab label={{tab3: 'Tab 3'}} activeClassName='active'>
-      <ul><li>qux</li></ul>
+      <p>qux</p>
     </Tab>
   </Tabs>
 )

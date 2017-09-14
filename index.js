@@ -37,6 +37,7 @@ class Tabs extends Component {
           [labelId]: {
             labelId: labelId,
             labelVal: labelVal,
+            className: child.attributes.class || '',
             activeClassName: activeClassName,
             tabcontent: child.children,
             attrs: attrs
@@ -55,53 +56,34 @@ class Tabs extends Component {
     const activeTab = hash === 'default' ? tabs[tabs.default] : tabs[hash]
 
     return (
-      <ul>
-        {
-          Object.values(tabs).map(t => (
-            typeof (t) === 'object'
-            ? <Tab
-                labelId={t.labelId}
-                labelVal={t.labelVal}
-                activeClassName={t.activeClassName}
-                tabindex={activeTab ? activeTab.labelId : null}
-                {...t.attrs}
-              >
-                {t.tabcontent}
-              </Tab>
-            : null
-          ))
-        }
-      </ul>
+      <section>
+        <ul {...props}>
+          {
+            Object.values(tabs).map(t => {
+              const isActive = activeTab && activeTab.labelId === t.labelId
+              const clsName = t.className
+              const cls =
+                isActive
+                ? `${clsName} ${t.activeClassName}`.trim()
+                : clsName
+
+              return typeof (t) === 'object'
+                ? <li {...t.attrs} class={cls}>
+                    <a href={`#${t.labelId}`}>{t.labelVal}</a>
+                  </li>
+                : null
+            })
+          }
+        </ul>
+        {activeTab ? <Tab>{activeTab.tabcontent}</Tab> : null}
+      </section>
     )
   }
 }
 
 const Tab = props => {
-  const {
-    labelId,
-    labelVal,
-    tabindex,
-    activeClassName,
-    children,
-    ...rest
-  } = props
-  const clsList = props.class
-  const isActive = tabindex === labelId
-
-  let cls
-
-  if (!isActive) cls = clsList || ''
-  else cls = clsList ? `${clsList} ${activeClassName}` : activeClassName
-
   return (
-    <li class={cls}>
-      <a href={`#${labelId}`}>{labelVal}</a>
-      {
-        isActive
-        ? <div {...rest}>{children}</div>
-        : null
-      }
-    </li>
+    <div>{props.children}</div>
   )
 }
 
