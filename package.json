@@ -1,7 +1,7 @@
 {
-  "name": "preact-tabs",
+  "name": "preact-hashtabs",
   "version": "0.1.0",
-  "description": "Minimal tabs component for preact",
+  "description": "Minimal tabs component for preact, based on window hash",
   "main": "index.js",
   "scripts": {
     "prebuild": "eslint index.js",
