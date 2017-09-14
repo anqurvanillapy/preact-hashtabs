@@ -5,21 +5,28 @@ A minimal `<Tabs />` component for
 `window.location.hash`, so it is **not suitable** for complicated use of nested
 tabs, and its functionality is yet very simple.
 
-## Usage
+## Properties
 
-- Component properties
-  + Activate a tab with `tabdefault` if no hash in current locaion.  If there
-  are multiple default tabs, the last one will be enabled
-  + `label` property for the link (`<a />`) of a tab
-  + `activeClassName` for a class name to append in the active tab's `classList`
+### `tabdefault`
+
+Activate a tab with `tabdefault` if no hash in current locaion.  If there are
+multiple default tabs, the last one will be enabled
+
+### `label`
+
+Text content for the link (`<a />`) of a tab
+
+### `activeClassName`
+
+A class name to append in the active tab's `classList`
 
 ## Example
 
 ```js
 import { h, render } from 'preact'
-import { Tabs, Tab } from './index'
+import { Tabs, Tab } from 'preact-hashtabs'
 
-const App = _ => (
+const App = () => (
   <Tabs>
     <Tab
       tabdefault

@@ -1,7 +1,7 @@
 import { h, render } from 'preact'
 import { Tabs, Tab } from './index'
 
-const App = _ => (
+const App = () => (
   <main>
     <h1><code>preact-hashtabs</code></h1>
     <Tabs>
