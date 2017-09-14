@@ -1,6 +1,6 @@
 {
   "name": "preact-hashtabs",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Minimal tabs component for preact, based on window hash",
   "main": "index.js",
   "scripts": {
