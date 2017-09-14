@@ -85,10 +85,10 @@ var Tabs = function (_Component) {
 
       return (0, _preact.h)(
         'section',
-        null,
+        props,
         (0, _preact.h)(
           'ul',
-          props,
+          null,
           Object.values(tabs).map(function (t) {
             var isActive = activeTab && activeTab.labelId === t.labelId;
             var clsName = t.className;

@@ -56,8 +56,8 @@ class Tabs extends Component {
     const activeTab = hash === 'default' ? tabs[tabs.default] : tabs[hash]
 
     return (
-      <section>
-        <ul {...props}>
+      <section {...props}>
+        <ul>
           {
             Object.values(tabs).map(t => {
               const isActive = activeTab && activeTab.labelId === t.labelId
