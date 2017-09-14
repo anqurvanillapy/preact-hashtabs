@@ -2,7 +2,7 @@
   "name": "preact-hashtabs",
   "version": "1.0.3",
   "description": "Minimal tabs component for preact, based on window hash",
-  "main": "index.js",
+  "main": "./dist/preact.hashtabs.js",
   "scripts": {
     "prebuild": "eslint index.js",
     "dev": "mkdirp ./dist && babel index.js -o ./dist/preact.hashtabs.js",
@@ -46,5 +46,10 @@
     "uglify-js": "^3.1.0",
     "webpack": "^3.5.2",
     "webpack-dev-server": "^2.7.1"
-  }
+  },
+  "files": [
+    "index.js",
+    "dist/preact.hashtabs.js",
+    "dist/preact.hashtabs.min.js"
+  ]
 }
