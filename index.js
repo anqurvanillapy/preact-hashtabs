@@ -1,67 +1,103 @@
-import { h, Component, cloneElement } from 'preact'
+import { h, Component } from 'preact'
 
-export class Tabs extends Component {
-  render (props) {
-    this._parseChildren(props)
+class Tabs extends Component {
+  constructor (props) {
+    super()
 
-    return (
-      <div {...props} />
+    this.state = {
+      hash: this.getLocationHash(),
+      tabs: this.copyPropsToState(props.children)
+    }
+
+    window.addEventListener('hashchange', () => {
+      this.setState({hash: this.getLocationHash()})
+    }) 
+  }
+
+  getLocationHash = () => window.location.hash.slice(1) || 'default'
+
+  copyPropsToState = (children) => {
+    let defaulttab
+
+    return Object.assign(
+      children.map(child => {
+        const {
+          label,
+          classname,
+          tabdefault,
+          activeClassName,
+          ...attrs
+        } = child.attributes
+
+        if (tabdefault) defaulttab = label
+
+        return {
+          [label]: {
+            label: label,
+            activeClassName: activeClassName,
+            tabcontent: child.children,
+            attrs: attrs
+          }
+        }
+      }).reduce((prev, next) => Object.assign(prev, next)),
+      {default: defaulttab}
     )
   }
 
-  _parseChildren (props) {
-    const labels = []
-    const contents = []
-
-    props.children.forEach(c => {
-      if (isTab(c)) {
-        console.log(c.children[0].children)
-      }
-    })
-  }
-
-  _handleClick (idx) {
-    if (this.props.onChange) this.props.onChange(idx)
-  }
-}
-
-export class Tab extends Component {
   render (props) {
     const {
-      activeClassName,
-      children, label, ...other
-    } = props
-
-    const cls = stripActiveClass(props.class, activeClassName) || []
+      tabs,
+      hash
+    } = this.state
+    const activeTab = hash === 'default' ? tabs[tabs.default] : tabs[hash]
 
     return (
-      <section
-        class={cls.join(' ')}
-        role='tab'
-        tabIndex='0'
-        {...other}
-      >
-        <span onClick={this._handleClick}>{label}</span>
-        {children}
-      </section>
+      <ul>
+        {
+          Object.values(tabs).map(t => (
+            typeof (t) === 'object'
+            ? <Tab
+                label={t.label}
+                activeClassName={t.activeClassName}
+                tabindex={activeTab ? activeTab.label : null}
+                {...t.attrs}
+              >
+                {t.tabcontent}
+              </Tab>
+            : null
+          ))
+        }
+      </ul>
     )
   }
-
-  _handleClick (e) {
-    if (this.props.onClick) this.props.onClick(e, this.props.index)
-  }
 }
 
-function isTab (n) {
-  return !!(n && n.nodeName.name === 'Tab')
+const Tab = props => {
+  const {
+    label,
+    tabindex,
+    activeClassName,
+    children,
+    ...rest
+  } = props
+  const clsList = props.class
+  const isActive = tabindex === label
+
+  let cls
+
+  if (!isActive) cls = clsList || ''
+  else cls = clsList ? `${clsList} ${activeClassName}` : activeClassName
+
+  return (
+    <li class={cls}>
+      <a href={`#${label}`}>{label}</a>
+      {
+        isActive
+        ? <div {...rest}>{children}</div>
+        : null
+      }
+    </li>
+  )
 }
 
-function stripActiveClass (cls, activeCls) {
-  if (!cls) return
-
-  let clsarr = cls.split(' ')
-  const i = clsarr.indexOf(activeCls)
-  if (i > -1) clsarr.splice(i, 1)
-
-  return clsarr
-}
+export { Tabs, Tab }

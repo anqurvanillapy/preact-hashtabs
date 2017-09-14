@@ -1,5 +1,6 @@
-# Distribution directory.
-dist/
+dist/*
+!dist/preact.hashtabs.js
+!dist/preact.hashtabs.min.js
 
 #### joe made this: http://goel.io/joe
 

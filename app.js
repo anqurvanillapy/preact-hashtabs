@@ -3,23 +3,25 @@ import { Tabs, Tab } from './index'
 
 const App = _ => (
   <main>
-    <h1><code>preact-tabs</code></h1>
-    <h2>Minimal</h2>
+    <h1><code>preact-hashtabs</code></h1>
     <Tabs>
-      <Tab class='foo bar baz' label='foo' activeClassName='active'>
+      <Tab
+        tabdefault
+        id='foo'
+        label='tab0'
+        class='foo bar baz'
+        activeClassName='active'
+      >
         <ul><li>foo</li></ul>
       </Tab>
-      <Tab label='bar' activeClassName='active'>
+      <Tab label='tab1' activeClassName='active'>
         <ul><li>bar</li></ul>
       </Tab>
-    </Tabs>
-    <h2>Stylized</h2>
-    <Tabs>
-      <Tab label='foo' activeClassName='active'>
-        <ul><li>foo</li></ul>
+      <Tab label='tab2' activeClassName='active'>
+        <ul><li>baz</li></ul>
       </Tab>
-      <Tab label='bar' activeClassName='active'>
-        <ul><li>bar</li></ul>
+      <Tab label='tab3' activeClassName='active'>
+        <ul><li>qux</li></ul>
       </Tab>
     </Tabs>
   </main>
