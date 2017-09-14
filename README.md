@@ -22,7 +22,7 @@ A class name to append in the active tab's `classList`
 
 ## Example
 
-[anqurvanillapy.github.io/preact-tabs](https://anqurvanillapy.github.io/preact-tabs)
+[anqurvanillapy.github.io/preact-hashtabs](https://anqurvanillapy.github.io/preact-hashtabs)
 
 ```js
 import { h, render } from 'preact'
