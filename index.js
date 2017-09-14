@@ -29,11 +29,14 @@ class Tabs extends Component {
           ...attrs
         } = child.attributes
 
-        if (tabdefault) defaulttab = label
+        const labelId = Object.keys(label).pop()
+        const labelVal = label[labelId]
+        if (tabdefault) defaulttab = labelId
 
         return {
-          [label]: {
-            label: label,
+          [labelId]: {
+            labelId: labelId,
+            labelVal: labelVal,
             activeClassName: activeClassName,
             tabcontent: child.children,
             attrs: attrs
@@ -57,9 +60,10 @@ class Tabs extends Component {
           Object.values(tabs).map(t => (
             typeof (t) === 'object'
             ? <Tab
-                label={t.label}
+                labelId={t.labelId}
+                labelVal={t.labelVal}
                 activeClassName={t.activeClassName}
-                tabindex={activeTab ? activeTab.label : null}
+                tabindex={activeTab ? activeTab.labelId : null}
                 {...t.attrs}
               >
                 {t.tabcontent}
@@ -74,14 +78,15 @@ class Tabs extends Component {
 
 const Tab = props => {
   const {
-    label,
+    labelId,
+    labelVal,
     tabindex,
     activeClassName,
     children,
     ...rest
   } = props
   const clsList = props.class
-  const isActive = tabindex === label
+  const isActive = tabindex === labelId
 
   let cls
 
@@ -90,7 +95,7 @@ const Tab = props => {
 
   return (
     <li class={cls}>
-      <a href={`#${label}`}>{label}</a>
+      <a href={`#${labelId}`}>{labelVal}</a>
       {
         isActive
         ? <div {...rest}>{children}</div>

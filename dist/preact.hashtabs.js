@@ -46,10 +46,13 @@ var Tabs = function (_Component) {
             activeClassName = _child$attributes.activeClassName,
             attrs = _objectWithoutProperties(_child$attributes, ['label', 'classname', 'tabdefault', 'activeClassName']);
 
-        if (tabdefault) defaulttab = label;
+        var labelId = Object.keys(label).pop();
+        var labelVal = label[labelId];
+        if (tabdefault) defaulttab = labelId;
 
-        return _defineProperty({}, label, {
-          label: label,
+        return _defineProperty({}, labelId, {
+          labelId: labelId,
+          labelVal: labelVal,
           activeClassName: activeClassName,
           tabcontent: child.children,
           attrs: attrs
@@ -86,9 +89,10 @@ var Tabs = function (_Component) {
           return (typeof t === 'undefined' ? 'undefined' : _typeof(t)) === 'object' ? (0, _preact.h)(
             Tab,
             _extends({
-              label: t.label,
+              labelId: t.labelId,
+              labelVal: t.labelVal,
               activeClassName: t.activeClassName,
-              tabindex: activeTab ? activeTab.label : null
+              tabindex: activeTab ? activeTab.labelId : null
             }, t.attrs),
             t.tabcontent
           ) : null;
@@ -101,14 +105,15 @@ var Tabs = function (_Component) {
 }(_preact.Component);
 
 var Tab = function Tab(props) {
-  var label = props.label,
+  var labelId = props.labelId,
+      labelVal = props.labelVal,
       tabindex = props.tabindex,
       activeClassName = props.activeClassName,
       children = props.children,
-      rest = _objectWithoutProperties(props, ['label', 'tabindex', 'activeClassName', 'children']);
+      rest = _objectWithoutProperties(props, ['labelId', 'labelVal', 'tabindex', 'activeClassName', 'children']);
 
   var clsList = props.class;
-  var isActive = tabindex === label;
+  var isActive = tabindex === labelId;
 
   var cls = void 0;
 
@@ -119,8 +124,8 @@ var Tab = function Tab(props) {
     { 'class': cls },
     (0, _preact.h)(
       'a',
-      { href: '#' + label },
-      label
+      { href: '#' + labelId },
+      labelVal
     ),
     isActive ? (0, _preact.h)(
       'div',
